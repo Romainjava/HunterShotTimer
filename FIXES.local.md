@@ -159,3 +159,19 @@ Original : `VendorData.lua.orig` dans ce dossier.
 
 Si l'addon est mis a jour : relancer le generateur (il relit le `VendorData.lua` de HST et
 Polestar_Codex) puis recopier le fichier produit.
+## 5e correctif : SetBinding() bloque dans Raccourcis (2026-11-19)
+
+Erreur : `[ADDON_ACTION_BLOCKED] L'AddOn 'HunterShotTimer' a tente d'appeler la fonction protegee 'SetBinding()'`,
+pile `Blizzard_Keybindings.lua` `ProcessInput` -> `UnbindKey` -> `SetBinding`.
+
+Cause : `ns.CreateOptions` (Options.lua) enregistrait une categorie `RegisterVerticalLayoutCategory` avec
+un `CreateSettingsButtonInitializer`, et son bouton appelait `HideUIPanel(SettingsPanel)` depuis le code
+de l'addon. Les deux tachent le panneau Options partage ; la page Raccourcis, dans le meme panneau,
+s'execute alors tachee et `SetBinding` est bloque.
+
+Correctif : categorie `RegisterCanvasLayoutCategory` avec un cadre de l'addon (titre + bouton
+"Open settings" + texte). Le bouton n'appelle plus `HideUIPanel` : le panneau Options reste ouvert,
+la fenetre HST (strate DIALOG) s'ouvre par-dessus.
+
+Verification : `lua-check/probe-hst-options.js` charge le vrai Options.lua et execute `CreateOptions` ;
+il echoue si l'addon utilise la vertical layout ou `HideUIPanel`. Original : `Options.lua.orig`.

@@ -374,15 +374,25 @@ local function build()
 end
 
 -- Options > AddOns > Hunter Shot Timer: a button that opens this window.
+-- Canvas layout on purpose: a vertical layout initializer and HideUIPanel(SettingsPanel)
+-- from addon code taint the shared Settings panel, and the Key Bindings page then gets
+-- SetBinding() blocked (ADDON_ACTION_BLOCKED). The Settings panel is left open.
 function ns.CreateOptions()
-  if not (Settings and Settings.RegisterVerticalLayoutCategory and CreateSettingsButtonInitializer) then return end
+  if not (Settings and Settings.RegisterCanvasLayoutCategory) then return end
   local ok = pcall(function()
-    local cat, layout = Settings.RegisterVerticalLayoutCategory("Hunter Shot Timer")
-    layout:AddInitializer(CreateSettingsButtonInitializer("Hunter Shot Timer", "Open settings", function()
-      if SettingsPanel then HideUIPanel(SettingsPanel) end
-      ns.OpenOptions()
-    end, "Size, fonts, colours and the range check. Also: /hst", true))
-    Settings.RegisterAddOnCategory(cat)
+    local panel = CreateFrame("Frame")
+    local title = panel:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
+    title:SetPoint("TOPLEFT", 16, -16)
+    title:SetText("Hunter Shot Timer")
+    local open = CreateFrame("Button", nil, panel, "UIPanelButtonTemplate")
+    open:SetSize(160, 24)
+    open:SetPoint("TOPLEFT", title, "BOTTOMLEFT", 0, -12)
+    open:SetText("Open settings")
+    open:SetScript("OnClick", ns.OpenOptions)
+    local about = panel:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
+    about:SetPoint("TOPLEFT", open, "BOTTOMLEFT", 0, -8)
+    about:SetText("Size, fonts, colours and the range check. Also: /hst")
+    Settings.RegisterAddOnCategory(Settings.RegisterCanvasLayoutCategory(panel, "Hunter Shot Timer"))
   end)
   return ok
 end
