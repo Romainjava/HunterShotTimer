@@ -1,11 +1,29 @@
 # Hunter Shot Timer
 
 > **This is a fork** of [Fkleppe/HunterShotTimer](https://github.com/Fkleppe/HunterShotTimer)
-> (v0.11.3) with local fixes for WoW Forever: map pin taint, Settings panel taint that blocked
-> key bindings, swing-based timing, and ammo vendors at Forever positions. Every change is
-> listed in [FIXES.local.md](FIXES.local.md). The original code belongs to its author; see
-> [LICENSE](LICENSE) for what the MIT licence of this fork covers. The rest of this README is
-> the upstream one.
+> v0.11.3, patched for WoW Forever. Nothing from upstream after v0.11.3 is included. The
+> original code belongs to its author; see [LICENSE](LICENSE) for what the MIT licence of this
+> fork covers. The section below lists what differs; the rest of this README is the upstream
+> one (its images live in the upstream `docs/` folder, not in this fork).
+
+## Changes in this fork
+
+Compared with upstream v0.11.3. Details, error stacks and how each fix was checked are in
+[FIXES.local.md](FIXES.local.md).
+
+| File | Change | Why |
+| --- | --- | --- |
+| `Vendors.lua` | Vendor pins override `SetPassThroughButtons` with a no-op | The map calls this protected method on every pin; on an addon pin it was blocked (`ADDON_ACTION_BLOCKED`) |
+| `Vendors.lua` | `RefreshAllData` defers pin creation to the next frame (`C_Timer.After(0)`), merging bursts | Acquiring pins inside the map's secure refresh loop tainted the quest pins that run after it |
+| `Vendors.lua` | No more `SetPinTemplateType` or custom frame level; pins use `PIN_FRAME_LEVEL_AREA_POI` | Writing into `WorldMapFrame`'s shared pin tables tainted every pin pool |
+| `Timer.lua`, `Bar.lua` | The bar runs on the real swing time, without the `EarlyDelay` extension; the shot lands at max(end of swing, stop + stand-still time); stand-still time is learned from every late stop | Matches the game's Auto Shot rule as measured on Forever |
+| `VendorData.lua` | Ammo vendors regenerated at Forever positions: 11 moved, 16 added (Mount Hyjal, Zephras Isle, Riverglades...), none removed | The upstream list comes from Classic data; some Forever zones moved vendors by up to 22 map points |
+| `Options.lua` | The Options > AddOns page is a canvas panel with an "Open settings" button; it no longer calls `HideUIPanel(SettingsPanel)` | The vertical layout initializer and that call tainted the shared Settings panel, so the Key Bindings page had `SetBinding()` blocked |
+| `README.md` | This section, and the timing table below rewritten for the new model | Documentation |
+| `.gitignore`, `LICENSE`, `FIXES.local.md` | Added or replaced | Fork housekeeping |
+
+Every other file (`Ammo.lua`, `Config.lua`, `Distance.lua`, `Shots.lua`, `Pins.xml`,
+`HunterShotTimer.toc`, `Media/`) is identical to upstream v0.11.3.
 
 **An Auto Shot bar for hunters on WoW Forever.** It shows when you are free to move and when
 you must stand still so your next Auto Shot fires on time. It also has a small range check
