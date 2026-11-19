@@ -1,5 +1,12 @@
 # Hunter Shot Timer
 
+> **This is a fork** of [Fkleppe/HunterShotTimer](https://github.com/Fkleppe/HunterShotTimer)
+> (v0.11.3) with local fixes for WoW Forever: map pin taint, Settings panel taint that blocked
+> key bindings, swing-based timing, and ammo vendors at Forever positions. Every change is
+> listed in [FIXES.local.md](FIXES.local.md). The original code belongs to its author; see
+> [LICENSE](LICENSE) for what the MIT licence of this fork covers. The rest of this README is
+> the upstream one.
+
 **An Auto Shot bar for hunters on WoW Forever.** It shows when you are free to move and when
 you must stand still so your next Auto Shot fires on time. It also has a small range check
 with the distance to your target, an estimate of shots to kill, ammo left, and every arrow
