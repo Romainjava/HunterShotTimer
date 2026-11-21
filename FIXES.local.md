@@ -1,5 +1,9 @@
 # HunterShotTimer - correctif local
 
+> Depuis le renommage, l'addon est publie sous le nom **Hunter Shot Timer: Reforged**
+> (dossier `HunterShotTimerReforged`, base de reglages `HunterShotTimerReforgedDB`). Les
+> chemins et noms d'addon cites ci-dessous sont ceux des deploiements anterieurs.
+
 Date : 2026-11-06
 Version de l'addon : 0.11.3
 

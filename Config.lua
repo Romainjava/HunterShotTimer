@@ -53,7 +53,7 @@ ns.DEFAULTS = {
 
 -- The game's own fonts, then fonts shipped in Media\Fonts (SIL Open Font License,
 -- see Media\Fonts\LICENSES.txt).
-local MEDIA = "Interface\\AddOns\\" .. (addonName or "HunterShotTimer") .. "\\Media\\Fonts\\"
+local MEDIA = "Interface\\AddOns\\" .. (addonName or "HunterShotTimerReforged") .. "\\Media\\Fonts\\"
 ns.FONTS = {
   { "Fonts\\2002B.ttf", "2002 Bold" },
   { "Fonts\\2002.TTF", "2002" },

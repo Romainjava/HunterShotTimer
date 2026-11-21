@@ -1,7 +1,9 @@
-# Hunter Shot Timer
+# Hunter Shot Timer: Reforged
 
 > **This is a fork** of [Fkleppe/HunterShotTimer](https://github.com/Fkleppe/HunterShotTimer)
-> v0.11.3, patched for WoW Forever. Nothing from upstream after v0.11.3 is included. The
+> v0.11.3, patched for WoW Forever and published as **Hunter Shot Timer: Reforged** (addon
+> folder `HunterShotTimerReforged`), so it can sit next to the original addon. Nothing from
+> upstream after v0.11.3 is included. The
 > original code belongs to its author; see [LICENSE](LICENSE) for what the MIT licence of this
 > fork covers. The section below lists what differs; the rest of this README is the upstream
 > one (its images live in the upstream `docs/` folder, not in this fork).
@@ -23,7 +25,7 @@ Compared with upstream v0.11.3. Details, error stacks and how each fix was check
 | `.gitignore`, `LICENSE`, `FIXES.local.md` | Added or replaced | Fork housekeeping |
 
 Every other file (`Ammo.lua`, `Config.lua`, `Distance.lua`, `Shots.lua`, `Pins.xml`,
-`HunterShotTimer.toc`, `Media/`) is identical to upstream v0.11.3.
+`HunterShotTimerReforged.toc`, `Media/`) is identical to upstream v0.11.3.
 
 **An Auto Shot bar for hunters on WoW Forever.** It shows when you are free to move and when
 you must stand still so your next Auto Shot fires on time. It also has a small range check
@@ -47,31 +49,32 @@ and bullet vendor on your world map and minimap.
 
 ## Download and install
 
-1. **Download** `HunterShotTimer.zip` from the
+1. **Download** the fork (this repository) or the upstream `HunterShotTimer.zip` from the
    [latest release](https://github.com/Fkleppe/HunterShotTimer/releases/latest).
 2. **Close WoW.**
 3. **Unzip** it into the Forever client's AddOns folder, so you end up with:
 
    ```
-   World of Warcraft\_classic_beta_\Interface\AddOns\HunterShotTimer\HunterShotTimer.toc
+   World of Warcraft\_classic_beta_\Interface\AddOns\HunterShotTimerReforged\HunterShotTimerReforged.toc
    ```
 
-   The folder must be called exactly `HunterShotTimer` and the `.toc` file must sit directly
-   inside it (not in a second folder below it).
+   The folder must be called exactly `HunterShotTimerReforged` and the `.toc` file must sit
+   directly inside it (not in a second folder below it). This is what lets it coexist with the
+   original **Hunter Shot Timer** addon, which uses the folder `HunterShotTimer`.
 4. **Start WoW.** On the character screen, open **AddOns** and make sure
-   **Hunter Shot Timer** is ticked.
+   **Hunter Shot Timer: Reforged** is ticked.
 5. Log in on your hunter and type **`/hst`** to open the settings.
 
 <details>
 <summary>Installing from the source code instead (Code → Download ZIP, or git)</summary>
 
 GitHub's **Code → Download ZIP** unpacks as `HunterShotTimer-main`. Rename that folder to
-`HunterShotTimer` before putting it in `Interface\AddOns`. With git, clone straight into the
-AddOns folder:
+`HunterShotTimerReforged` before putting it in `Interface\AddOns`. With git, clone this fork
+straight into the AddOns folder:
 
 ```
 cd "C:\Program Files (x86)\World of Warcraft\_classic_beta_\Interface\AddOns"
-git clone https://github.com/Fkleppe/HunterShotTimer.git
+git clone <URL of the HunterShotTimerReforged repo> HunterShotTimerReforged
 ```
 
 Update later with `git pull` in that folder. The extra `docs`, `tests` and `tools` folders are
@@ -79,7 +82,7 @@ for development; the game ignores them.
 </details>
 
 **Updating:** replace the folder with the new version. Your settings are kept: they live in
-`WTF\Account\<account>\SavedVariables\HunterShotTimer.lua`, not in the addon folder.
+`WTF\Account\<account>\SavedVariables\HunterShotTimerReforged.lua`, not in the addon folder.
 Restart WoW when an update adds or removes files; otherwise `/reload` is enough.
 
 **Requirements:** the WoW Forever client (`_classic_beta_`, interface 16001). The bar only
@@ -222,7 +225,7 @@ place, so nothing overlaps, whatever size you choose.
 
 Everything is set in one window. While it is open the bar plays a demo and can be dragged
 anywhere on screen; closing the window locks it again. You can also open it from
-**Options → AddOns → Hunter Shot Timer**.
+**Options → AddOns → Hunter Shot Timer: Reforged**.
 
 ![The settings window](docs/images/settings.png)
 
@@ -266,7 +269,7 @@ Gaps where the shot was held up (you moved, or were out of range) are left out:
 
 | Problem | What to do |
 |---|---|
-| The addon is not in the AddOns list | Check the path: `Interface\AddOns\HunterShotTimer\HunterShotTimer.toc`. A folder called `HunterShotTimer-main`, or a folder inside a folder, does not load. Restart WoW after adding it. |
+| The addon is not in the AddOns list | Check the path: `Interface\AddOns\HunterShotTimerReforged\HunterShotTimerReforged.toc`. A folder called `HunterShotTimer-main`, or a folder inside a folder, does not load. Restart WoW after adding it. |
 | No bar | The bar is for hunters, and appears when you start Auto Shot. Type `/hst` to see it in demo mode. |
 | No range text | It shows for hostile targets only. Type `/hst range` with a target and share the output in an issue. |
 | No "shots" number | Your client hides enemy health from addons. `/hst probe` mid-fight tells you. |

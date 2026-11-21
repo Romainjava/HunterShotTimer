@@ -879,7 +879,7 @@ events:SetScript("OnEvent", function(_, event, a, b)
     local _, class = UnitClass("player")
     ns.isHunter = class == "HUNTER"
     if ns.LoadRangeItems then ns.LoadRangeItems() end
-    HunterShotTimerDB = ns.InitDB(HunterShotTimerDB)
+    HunterShotTimerReforgedDB = ns.InitDB(HunterShotTimerReforgedDB)
     ns.ApplyLayout()
     ns.ApplyPosition()
     if ns.CreateOptions then ns.CreateOptions() end
